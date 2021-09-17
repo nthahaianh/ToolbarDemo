@@ -30,10 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.search -> {
-                Toast.makeText(this, "Search selected", Toast.LENGTH_SHORT).show()
-                return true
-            }
             R.id.item1 -> {
                 Toast.makeText(this, "Item1 selected", Toast.LENGTH_SHORT).show()
                 return true
