@@ -1,26 +1,17 @@
 package com.example.toolbardemo
 
-import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.fragment.app.Fragment
 
-
-class MainActivity : AppCompatActivity() {
+class ToolbarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        toolbar.title = "This is title"
-
-        setSupportActionBar(toolbar as Toolbar)
-
-//        val actionBar = supportActionBar    // sd toolbar như actionbar
-        btn1.setOnClickListener { startActivity(Intent(this,ToolbarActivity::class.java)) }
-
+        setContentView(R.layout.activity_toolbar)
+        replaceFragment(Fragment1())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -35,18 +26,24 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.item1 -> {
-                Toast.makeText(this, "Item1 selected", Toast.LENGTH_SHORT).show()
+                replaceFragment(Fragment1())
                 return true
             }
             R.id.item2 -> {
-                Toast.makeText(this, "Item2 selected", Toast.LENGTH_SHORT).show()
+                replaceFragment(Fragment2())
                 return true
             }
             R.id.item3 -> {
-                Toast.makeText(this, "Item3 selected", Toast.LENGTH_SHORT).show()
+                replaceFragment(Fragment3())
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        val transaction = supportFragmentManager?.beginTransaction()
+        transaction.replace(R.id.main_container, fragment)
+        transaction.commit()
     }
 }
